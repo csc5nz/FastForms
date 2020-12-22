@@ -1,0 +1,7 @@
+sudo python3 -m pip install mysql-connector
+
+pip install mysqlclient
+
+sudo apt-get install python3-dev libmysqlclient-dev
+
+wheel?

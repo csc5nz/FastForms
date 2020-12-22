@@ -1,0 +1,36 @@
+install apache server
+install mysql
+install pip
+install env
+install django
+
+
+
+1. create secrets.py file in FastForms/fastforms/fastforms
+
+copy the following code in secrets.py:
+
+secrete_key = 'o3uo3dceyst)tvgn=lxqezl@&casd3)4buxxt97wh$rx^y*nq4'
+database_engine = "django.db.backends.mysql"
+database_host = "127.0.0.1"
+database_name = "fastform"
+database_user = "fastform"
+database_password = "frog1234"
+#static_root = ""
+#static_url = ""
+
+
+2. create secrets.txt in FastForms/docs 
+
+mysql credentials:
+user: fastform
+password: frog1234
+
+3. create fastform database
+
+
+
+4. run requirements.txt
+    (install mysql-python, may not work because it's only compatible with python 2.6)
+    my need to use sudo apt-get install python3-dev libmysqlclient-dev
+    istead
