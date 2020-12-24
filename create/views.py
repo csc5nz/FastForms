@@ -7,7 +7,7 @@ from django.views.decorators.clickjacking import xframe_options_sameorigin
 
 # Create your views here.
 
-def bill_of_sale(request):
+def create_bill_of_sale(request):
     template = loader.get_template('create/build_bill_of_sale_01.html')
     context = {}
 
