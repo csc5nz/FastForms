@@ -1,0 +1,117 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<!--
+	Binary by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>FastForm - Create your form</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" type="text/css" href="{% static 'create/assets/css/main.css'%}" />
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header">
+				<a href="index.html" class="logo"><strong>FastForm</strong></a>
+				<nav>
+					<a href="#menu">Menu</a>
+				</nav>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="my_account.html">My Account</a></li>
+					<li><a href="log_in.html">Log In</a></li>
+				</ul>
+			</nav>
+
+		<!-- Main -->
+			<section id="main">
+				<div class="inner">
+					<header>
+						<h1>Bill of Sale</h1>
+					</header>
+					
+					<!-- Form -->
+					<section>
+						<div class="row">
+						<div class="6u 12u$(xsmall)"> 
+							<h3>Who is the Seller?</h3>
+							<form method="post" action="#">
+								<div class="row uniform 50%">
+									<div class="12u$">
+										Name:
+										<input type="text" name="name" id="name" value="" placeholder="Name"></input>
+									</div>
+									<div class="12u$">
+										Address:
+										<input type="text" name="address" id="address" value="" placeholder="Address"></input>
+									</div>
+									<div class="12u$">
+										City:
+										<input type="text" name="city" id="city" value="" placeholder="City"></input>
+									</div>
+									<div class="12u$">
+										State:
+										<div class="select-wrapper">
+											<select name="state" id="state">
+												<option value="">- State -</option>
+												<option value="1">State1</option>
+												<option value="1">State1</option>
+												<option value="1">State1</option>
+												<option value="1">State1</option>
+											</select>
+										</div>
+									</div>
+									<div class="12u$">
+										Zip code:
+										<input type="text" name="zip_code" id="zip_code" value="" placeholder="Zip code"></input>
+									</div>
+									
+									
+									<div class="12u$">
+										<ul class="actions">
+											<hr>
+											<li><input type="submit" value="Back" class="special" /></li>
+											<li><input type="reset" value="Save &amp Continue" /></li>
+										</ul>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="6u$ 12u$(xsmall)">
+							<iframe src="bill_of_sale.html" style="border: 1px dotted gray" width="100%" height="1000px"></iframe>
+						</div>
+					</div>
+					</section>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+				</ul>
+				<div class="copyright">
+					&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
