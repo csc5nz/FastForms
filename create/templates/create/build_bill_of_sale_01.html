@@ -1,11 +1,7 @@
 {% load static %}
 
 <!DOCTYPE HTML>
-<!--
-	Binary by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
+
 <html>
 	<head>
 		<title>FastForm - Create your form</title>
@@ -36,7 +32,7 @@
 			<section id="main">
 				<div class="inner">
 					<header>
-						<h1>Bill of Sale</h1>
+						<h1>Bill of Sale 01</h1>
 					</header>
 					
 					<!-- Form -->
@@ -44,43 +40,33 @@
 						<div class="row">
 						<div class="6u 12u$(xsmall)"> 
 							<h3>Who is the Seller?</h3>
-							<form method="post" action="#">
+							<form method="post"  enctype="multipart/form-data" >
+								{%csrf_token %}
+																	
 								<div class="row uniform 50%">
-									<div class="12u$">
-										Name:
-										<input type="text" name="name" id="name" value="" placeholder="Name"></input>
-									</div>
-									<div class="12u$">
-										Address:
-										<input type="text" name="address" id="address" value="" placeholder="Address"></input>
-									</div>
-									<div class="12u$">
-										City:
-										<input type="text" name="city" id="city" value="" placeholder="City"></input>
-									</div>
-									<div class="12u$">
-										State:
-										<div class="select-wrapper">
-											<select name="state" id="state">
-												<option value="">- State -</option>
-												<option value="1">State1</option>
-												<option value="1">State1</option>
-												<option value="1">State1</option>
-												<option value="1">State1</option>
-											</select>
-										</div>
-									</div>
-									<div class="12u$">
-										Zip code:
-										<input type="text" name="zip_code" id="zip_code" value="" placeholder="Zip code"></input>
-									</div>
-									
+									{% if page == '01' %}
+										{% for field in form %}
+											
+											<div class="12u$">
+												{% if field.name == 'seller_state' %}
+													{{ field.label }}
+													<div class="select-wrapper">
+														{{ field }}
+													</div>
+												{% else %}
+													{{ field.label }}
+													{{ field }}
+												{% endif %}
+											</div>
+											
+										{% endfor %}								
+							  		{% endif %}
 									
 									<div class="12u$">
 										<ul class="actions">
 											<hr>
 											<li><input type="submit" value="Back" class="special" /></li>
-											<li><input type="reset" value="Save &amp Continue" /></li>
+											<li><input type="submit" value="Save &amp Continue" /></li>
 										</ul>
 									</div>
 								</div>
@@ -102,16 +88,16 @@
 					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
 				</ul>
 				<div class="copyright">
-					&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.
+					<!-- &copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>. -->
 				</div>
 			</footer>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
+			<script src="{% static 'create/assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'create/assets/js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'create/assets/js/skel.min.js' %}"></script>
+			<script src="{% static 'create/assets/js/util.js' %}"></script>
+			<script src="{% static 'create/assets/js/main.js' %}"></script>
+			
 	</body>
 </html>
