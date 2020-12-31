@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Documents
-from .models import Bill_of_sale
+from .models import Document
+from .models import BillOfSale
 
 # Register your models here.
-admin.site.register(Documents)
-admin.site.register(Bill_of_sale)
+admin.site.register(Document)
+admin.site.register(BillOfSale)
