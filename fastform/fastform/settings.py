@@ -20,7 +20,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # Gets secrets from the secrets.py file
-from . secrets import *
+try:
+    print('exists')
+    from . secrets import *
+except ImportError:
+    print('no exists')
+    secrete_key = os.getenv('SECRET_KEY')
+    database_engine = os.getenv('DATABASE_ENGINE')
+    database_host = os.getenv('DATABASE_HOST')
+    database_name = os.getenv('DATABASE_NAME')
+    database_user = os.getenv('DATABASE_USER')
+    database_password = os.getenv('DATABASE_PASSWORD')
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = secrete_key
