@@ -34,3 +34,9 @@ password: frog1234
     (install mysql-python, may not work because it's only compatible with python 2.6)
     my need to use sudo apt-get install python3-dev libmysqlclient-dev
     istead
+    
+    
+    
+    
+(how to push to heroku branch:
+from main repository folder $git subtree push --prefix fastform origin heroku
