@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, Http404
 
 from django.http import HttpResponse
 from django.template import loader
@@ -9,12 +9,15 @@ from .models import BillOfSale
 from .forms import BillOfSaleForm, BillOfSaleForm01, BillOfSaleForm02, BillOfSaleForm03
 
 # Create your views here.
+def home(request):
 
-def create_bill_of_sale(request, page, id=None):
+    return render(request, 'create/home.html', {})
+
+def create_bill_of_sale(request, page=None, id=None):
     instance = get_object_or_404(BillOfSale, id=id) if id else None
     next_page = 0
     if request.method == "POST":
-        if page == 1:
+        if page is None or page == 1:
             form = BillOfSaleForm01(request.POST, instance=instance)
             next_page = 2
         elif page == 2 and id:
@@ -23,6 +26,7 @@ def create_bill_of_sale(request, page, id=None):
         elif page == 3 and id:
             form = BillOfSaleForm03(request.POST, instance=instance)
         else:
+            print("****PAGE ", page)
             raise Http404("Page does not exist")
 
         if form.is_valid():
@@ -34,7 +38,7 @@ def create_bill_of_sale(request, page, id=None):
         return redirect('create:create_bill_of_sale', page=next_page, id=bill_of_sale.id)
     
     else:
-        if page == 1:
+        if page is None or page == 1:
             form = BillOfSaleForm01(instance=instance)
         elif page == 2 and id:
             form = BillOfSaleForm02(instance=instance)
