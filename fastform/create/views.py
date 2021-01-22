@@ -10,11 +10,11 @@ from .forms import BillOfSaleForm, BillOfSaleForm01, BillOfSaleForm02, BillOfSal
 
 # Create your views here.
 def home(request):
-
     return render(request, 'create/home.html', {})
 
+
 def create_bill_of_sale(request, page=None, id=None):
-    instance = get_object_or_404(BillOfSale, id=id) if id else None
+    instance = get_object_or_404(BillOfSale, id=id) if id else BillOfSale.objects.create()
     next_page = 0
     if request.method == "POST":
         if page is None or page == 1:
@@ -34,8 +34,9 @@ def create_bill_of_sale(request, page=None, id=None):
         else:
             print('not valid')
         if page == 3:    
-            return redirect('index:home')    
-        return redirect('create:create_bill_of_sale', page=next_page, id=bill_of_sale.id)
+            return redirect('create:view_bill_of_sale', id=instance.id)    
+            # return redirect('index:home')    
+        return redirect('create:create_bill_of_sale', page=next_page, id=instance.id)
     
     else:
         if page is None or page == 1:
@@ -47,7 +48,7 @@ def create_bill_of_sale(request, page=None, id=None):
         else:
             raise Http404("Page does not exist")
 
-    return render(request, 'create/build_bill_of_sale_01.html', {'form': form, 'page': '01'})
+    return render(request, 'create/build_bill_of_sale_01.html', {'form': form, 'page': page, "id" : instance.id})
 
 
 def create_bill_of_sale_01(request, id=None):
@@ -90,8 +91,9 @@ def create_bill_of_sale_03(request, id=None):
     return render(request, 'create/build_bill_of_sale_01.html', {'form': form, 'page': '01'})
 
 @xframe_options_sameorigin
-def view_bill_of_sale(request):
+def view_bill_of_sale(request, id):
+    bill_of_sale = get_object_or_404(BillOfSale, id = id)
     template = loader.get_template('create/bill_of_sale.html')
-    context = {}
+    context = {'bill_of_sale': bill_of_sale}
 
     return HttpResponse(template.render(context, request))

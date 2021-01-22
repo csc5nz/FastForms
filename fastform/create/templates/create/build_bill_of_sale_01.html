@@ -44,7 +44,6 @@
 								{%csrf_token %}
 																	
 								<div class="row uniform 50%">
-									{% if page == '01' %}
 										{% for field in form %}
 											
 											<div class="12u$">
@@ -60,8 +59,7 @@
 											</div>
 											
 										{% endfor %}								
-							  		{% endif %}
-									
+							  		
 									<div class="12u$">
 										<ul class="actions">
 											<hr>
@@ -73,7 +71,7 @@
 							</form>
 						</div>
 						<div class="6u$ 12u$(xsmall)">
-							<iframe src="{% url 'create:view_bill_of_sale' %}" style="border: 1px dotted gray" width="100%" height="1000px"></iframe>
+							<iframe src="{% url 'create:view_bill_of_sale' id %}" style="border: 1px dotted gray" width="100%" height="1000px"></iframe>
 						</div>
 					</div>
 					</section>

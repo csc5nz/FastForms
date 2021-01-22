@@ -14,6 +14,6 @@ urlpatterns = [
     path('create_bill_of_sale_01/<int:id>/', views.create_bill_of_sale_01, name='create_bill_of_sale_01'),
     path('create_bill_of_sale_02/<int:id>/', views.create_bill_of_sale_02, name='create_bill_of_sale_02'),
     path('create_bill_of_sale_03/<int:id>/', views.create_bill_of_sale_03, name='create_bill_of_sale_03'),
-    path('view_bill_of_sale', views.view_bill_of_sale, name='view_bill_of_sale'),
-    
+    path('view_bill_of_sale/<int:id>/', views.view_bill_of_sale, name='view_bill_of_sale'),
+    path('view_bill_of_sale/', views.view_bill_of_sale, name='view_bill_of_sale'),
 ]
