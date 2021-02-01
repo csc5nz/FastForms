@@ -18,6 +18,7 @@ def create_bill_of_sale(request, page=None, id=None):
     next_page = 0
     if request.method == "POST":
         if page is None or page == 1:
+            page = 1
             form = BillOfSaleForm01(request.POST, instance=instance)
             next_page = 2
         elif page == 2 and id:
@@ -39,7 +40,9 @@ def create_bill_of_sale(request, page=None, id=None):
         return redirect('create:create_bill_of_sale', page=next_page, id=instance.id)
     
     else:
+        title = {1: "Who is the Seller?", 2: "Who is the Buyer?", 3: "What is the Property?"}
         if page is None or page == 1:
+            page = 1
             form = BillOfSaleForm01(instance=instance)
         elif page == 2 and id:
             form = BillOfSaleForm02(instance=instance)
@@ -47,8 +50,8 @@ def create_bill_of_sale(request, page=None, id=None):
             form = BillOfSaleForm03(instance=instance)
         else:
             raise Http404("Page does not exist")
-
-    return render(request, 'create/build_bill_of_sale_01.html', {'form': form, 'page': page, "id" : instance.id})
+    context = {'form': form, 'page': page, "id" : instance.id, "title" : title[page]}
+    return render(request, 'create/build_bill_of_sale_01.html', context)
 
 
 def create_bill_of_sale_01(request, id=None):
@@ -97,3 +100,24 @@ def view_bill_of_sale(request, id):
     context = {'bill_of_sale': bill_of_sale}
 
     return HttpResponse(template.render(context, request))
+
+
+
+
+from io import BytesIO
+from django.http import HttpResponse
+from django.template.loader import get_template
+import xhtml2pdf.pisa as pisa
+
+def view_pdf(request, id):
+    bill_of_sale = get_object_or_404(BillOfSale, id = id)
+    template = loader.get_template('create/bill_of_sale_pdf.html')
+    context = {'bill_of_sale': bill_of_sale}
+    html = template.render(context, request)
+    
+    response = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), response)
+    if not pdf.err:
+        return HttpResponse(response.getvalue(), content_type='application/pdf')
+    else:
+        return HttpResponse("Error Rendering PDF", status=400)
