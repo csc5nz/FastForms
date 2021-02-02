@@ -54,54 +54,13 @@ def create_bill_of_sale(request, page=None, id=None):
     return render(request, 'create/build_bill_of_sale_01.html', context)
 
 
-def create_bill_of_sale_01(request, id=None):
-    instance = get_object_or_404(BillOfSale, id=id) if id else None
-    if request.method == "POST":
-        form = BillOfSaleForm01(request.POST, instance=instance)
-        if form.is_valid():
-            bill_of_sale = form.save()  
-        else:
-            print('not valid')
-        return redirect('create:create_bill_of_sale_02', id=bill_of_sale.id)
-    else:
-        form = BillOfSaleForm01(instance=instance)
-    return render(request, 'create/build_bill_of_sale_01.html', {'form': form, 'page': '01'})
-
-def create_bill_of_sale_02(request, id=None):
-    instance = get_object_or_404(BillOfSale, id=id)
-    if request.method == "POST":
-        form = BillOfSaleForm02(request.POST, instance=instance)
-        if form.is_valid():
-            bill_of_sale = form.save()  
-        else:
-            print('not valid')
-        return redirect('create:create_bill_of_sale_03', id=bill_of_sale.id)
-    else:
-        form = BillOfSaleForm02(instance=instance)
-    return render(request, 'create/build_bill_of_sale_01.html', {'form': form, 'page': '01'})
-
-def create_bill_of_sale_03(request, id=None):
-    instance = get_object_or_404(BillOfSale, id=id)
-    if request.method == "POST":
-        form = BillOfSaleForm03(request.POST, instance=instance)
-        if form.is_valid():
-            bill_of_sale = form.save()  
-        else:
-            print('not valid')
-        return redirect('index:home')
-    else:
-        form = BillOfSaleForm03(instance=instance)
-    return render(request, 'create/build_bill_of_sale_01.html', {'form': form, 'page': '01'})
-
 @xframe_options_sameorigin
-def view_bill_of_sale(request, id):
-    bill_of_sale = get_object_or_404(BillOfSale, id = id)
+def view_bill_of_sale(request, id=None):
+    bill_of_sale = get_object_or_404(BillOfSale, id = id) if id else 0
     template = loader.get_template('create/bill_of_sale.html')
     context = {'bill_of_sale': bill_of_sale}
 
     return HttpResponse(template.render(context, request))
-
-
 
 
 from io import BytesIO
@@ -109,8 +68,8 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 import xhtml2pdf.pisa as pisa
 
-def view_pdf(request, id):
-    bill_of_sale = get_object_or_404(BillOfSale, id = id)
+def view_bill_of_sale_pdf(request, id=None):
+    bill_of_sale = get_object_or_404(BillOfSale, id = id) if id else 0
     template = loader.get_template('create/bill_of_sale_pdf.html')
     context = {'bill_of_sale': bill_of_sale}
     html = template.render(context, request)

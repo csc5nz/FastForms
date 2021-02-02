@@ -19,14 +19,15 @@
     <h2 style="text-align: center;">Bill of Sale</h2>
     <div>
     <p>
-      THIS BILL OF SALE is executed on {{ bill_of_sale.sale_date }}, by and 
-      between {% if bill_of_sale.seller_name %}{{ bill_of_sale.seller_name }}{% else %}<span class="empty-var"> </span>{% endif %}, residing at 
-      {% if bill_of_sale.seller_address %}{{ bill_of_sale.seller_address }}{% else %}<span class="empty-var"> </span>{% endif %} {% if bill_of_sale.seller_city %}{{ bill_of_sale.seller_city }}{% else %}<span class="empty-var"> </span>{% endif %}, 
-      {% if bill_of_sale.seller_state %}{{ bill_of_sale.seller_state }}{% else %}<span class="empty-var"> </span>{% endif %} {% if bill_of_sale.seller_zip %}{{ bill_of_sale.seller_zip }}{% else %}<span class="empty-var"> </span>{% endif %} 
+      
+      THIS BILL OF SALE is executed on {% if bill_of_sale.sale_date %}{{ bill_of_sale.sale_date }}{% else %}<span class="empty-var"> __________ </span>{% endif %}, by and 
+      between {% if bill_of_sale.seller_name %}{{ bill_of_sale.seller_name }}{% else %}<span class="empty-var"> _______________ </span>{% endif %}, residing at 
+      {% if bill_of_sale.seller_address %}{{ bill_of_sale.seller_address }}{% else %}<span class="empty-var"> _______________ </span>{% endif %} {% if bill_of_sale.seller_city %}{{ bill_of_sale.seller_city }}{% else %}<span class="empty-var"> _______________ </span>{% endif %}, 
+      {% if bill_of_sale.seller_state %}{{ bill_of_sale.seller_state }}{% else %}<span class="empty-var"> _______________ </span>{% endif %} {% if bill_of_sale.seller_zip %}{{ bill_of_sale.seller_zip }}{% else %}<span class="empty-var"> _______________ </span>{% endif %} 
        (hereinafter referred to as the "Seller") and 
-       {% if bill_of_sale.buyer_name %}{{ bill_of_sale.buyer_name }}{% else %}<span class="empty-var"> </span>{% endif %}, residing at 
-       {% if bill_of_sale.buyer_address %}{{ bill_of_sale.buyer_address }}{% else %}<span class="empty-var"> </span>{% endif %} {% if bill_of_sale.buyer_city %}{{ bill_of_sale.buyer_city }}{% else %}<span class="empty-var"> </span>{% endif %}, 
-       {% if bill_of_sale.buyer_state %}{{ bill_of_sale.buyer_state }}{% else %}<span class="empty-var"> </span>{% endif %} {% if bill_of_sale.buyer_zip %}{{ bill_of_sale.buyer_zip }}{% else %}<span class="empty-var"> </span>{% endif %}
+       {% if bill_of_sale.buyer_name %}{{ bill_of_sale.buyer_name }}{% else %}<span class="empty-var"> _______________ </span>{% endif %}, residing at 
+       {% if bill_of_sale.buyer_address %}{{ bill_of_sale.buyer_address }}{% else %}<span class="empty-var"> _______________ </span>{% endif %} {% if bill_of_sale.buyer_city %}{{ bill_of_sale.buyer_city }}{% else %}<span class="empty-var"> _______________ </span>{% endif %}, 
+       {% if bill_of_sale.buyer_state %}{{ bill_of_sale.buyer_state }}{% else %}<span class="empty-var"> _______________ </span>{% endif %} {% if bill_of_sale.buyer_zip %}{{ bill_of_sale.buyer_zip }}{% else %}<span class="empty-var"> _______________ </span>{% endif %}
        (hereinafter referred to as the "Buyer").
        <span></span>
     </p>
@@ -35,10 +36,10 @@
       the following property:
     </p>
     <p>
-      {% if bill_of_sale.properties %}{{ bill_of_sale.properties }}{% else %}<span class="empty-var"> </span>{% endif %}
+      {% if bill_of_sale.properties %}{{ bill_of_sale.properties }}{% else %}<span class="empty-var"> ______________________________ </span>{% endif %}
     </p>
     <p>
-      For and in consideration of a total purchase price of ${% if bill_of_sale.price %}{{ bill_of_sale.price }}{% else %}0.00{% endif %}, receipt of
+      For and in consideration of a total purchase price of ${% if bill_of_sale.price %}{{ bill_of_sale.price }}{% else %}<span class="empty-var"> _________ </span>{% endif %}, receipt of
       which is hereby acknowledged by Seller. The form of payment used will be
        cash and sales tax is included in the purchase price of the above-mentioned property.
 
@@ -65,7 +66,7 @@
         to accept all property in its existing state.
     </p>
     <p>
-      IN WITNESS THEREOF, the parties executed this Bill of Sale on {{ bill_of_sale.sale_date }},
+      IN WITNESS THEREOF, the parties executed this Bill of Sale on {% if bill_of_sale.sale_date %}{{ bill_of_sale.sale_date }}{% else %}<span class="empty-var"> __________ </span>{% endif %},
     </p>
     <div class="no-justify">
       <br>
