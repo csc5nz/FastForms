@@ -71,7 +71,11 @@
 							</form>
 						</div>
 						<div class="6u$ 12u$(xsmall)">
+							{% if id %}
 							<iframe src="{% url 'create:view_bill_of_sale' id %}" style="border: 1px dotted gray" width="100%" height="1000px"></iframe>
+							{% else %}
+							<iframe src="{% url 'create:view_bill_of_sale'%}" style="border: 1px dotted gray" width="100%" height="1000px"></iframe>
+							{% endif %}
 						</div>
 					</div>
 					</section>

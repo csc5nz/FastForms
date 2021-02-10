@@ -1,0 +1,105 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>FastForm - Create your form</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" type="text/css" href="{% static 'create/assets/css/main.css'%}" />
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header">
+				<a href="index.html" class="logo"><strong>FastForm</strong></a>
+				<nav>
+					<a href="#menu">Menu</a>
+				</nav>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="my_account.html">My Account</a></li>
+					<li><a href="log_in.html">Log In</a></li>
+				</ul>
+			</nav>
+
+		<!-- Main -->
+			<section id="main">
+				<div class="inner">
+					<header class="major special">
+						<h1>Recent Documents</h1>
+					</header>
+
+							<h4>Alternate</h4>
+							<div class="table-wrapper">
+								<table class="alt">
+									<thead>
+										<tr>
+											<th>Document</th>
+											<th>Date</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										{% for document in documents %}
+										
+										<tr>
+											{% with 'create:create_'|add:document.doc_type as create_doc_url %}
+											<td><a href="{% url create_doc_url page=1 id=document.doc_id%}">{{ document.doc_type }}</a></td>
+											{% endwith %}
+											
+											<td>{{ document.doc_date }}</td>
+											<td>
+											
+												<ul class="actions small">
+												<li class=><a href="#" class="button special small icon fa-print">Print</a></li>
+												{% with 'create:view_'|add:document.doc_type|add:'_pdf' as viewpdf_doc_url %}
+												<li><a href="{% url viewpdf_doc_url id=document.doc_id%}" class="button alt small icon fa-download">Download PDF</a></li>
+												{% endwith %}
+												<li><a href="#" class="button alt small icon fa-envelope">Send PDF</a></li>
+												</ul>
+												
+											 </td>
+											<td><a href="#" class="button special small icon fa-trash">Delete</a></td>
+										</tr>
+										{% endfor %}
+									</tbody>
+									<tfoot>
+										<tr>
+											<td colspan="3"></td>
+											<td>Page 1 of 1</td>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+						</section>
+
+					
+
+		<!-- Footer -->
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+				</ul>
+				<div class="copyright">
+					&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+		<script src="{% static 'create/assets/js/jquery.min.js' %}"></script>
+		<script src="{% static 'create/assets/js/jquery.scrolly.min.js' %}"></script>
+		<script src="{% static 'create/assets/js/skel.min.js' %}"></script>
+		<script src="{% static 'create/assets/js/util.js' %}"></script>
+		<script src="{% static 'create/assets/js/main.js' %}"></script>
+	
+	</body>
+</html>
