@@ -5,7 +5,7 @@ from django.template import loader
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 from django.utils import timezone
 
-from .models import BillOfSale
+from .models import BillOfSale, Document
 from .forms import BillOfSaleForm, BillOfSaleForm01, BillOfSaleForm02, BillOfSaleForm03
 
 # Create your views here.
@@ -13,8 +13,13 @@ def home(request):
     return render(request, 'create/home.html', {})
 
 
+def my_documents(request):
+    documents = Document.objects.all()
+    return render(request, 'create/my_documents.html', {'documents': documents})
+
+
 def create_bill_of_sale(request, page=None, id=None):
-    instance = get_object_or_404(BillOfSale, id=id) if id else BillOfSale.objects.create()
+    instance = get_object_or_404(BillOfSale, id=id) if id else None
     next_page = 0
     if request.method == "POST":
         if page is None or page == 1:
@@ -31,13 +36,15 @@ def create_bill_of_sale(request, page=None, id=None):
             raise Http404("Page does not exist")
 
         if form.is_valid():
-            bill_of_sale = form.save()  
+            bill_of_sale = form.save()
+            id = bill_of_sale.id   
         else:
             print('not valid')
+            print(form.errors)
         if page == 3:    
-            return redirect('create:view_bill_of_sale', id=instance.id)    
+            return redirect('create:view_bill_of_sale', id=id)    
             # return redirect('index:home')    
-        return redirect('create:create_bill_of_sale', page=next_page, id=instance.id)
+        return redirect('create:create_bill_of_sale', page=next_page, id=id)
     
     else:
         title = {1: "Who is the Seller?", 2: "Who is the Buyer?", 3: "What is the Property?"}
@@ -50,13 +57,13 @@ def create_bill_of_sale(request, page=None, id=None):
             form = BillOfSaleForm03(instance=instance)
         else:
             raise Http404("Page does not exist")
-    context = {'form': form, 'page': page, "id" : instance.id, "title" : title[page]}
+    context = {'form': form, 'page': page, "id" : id, "title" : title[page]}
     return render(request, 'create/build_bill_of_sale_01.html', context)
 
 
 @xframe_options_sameorigin
 def view_bill_of_sale(request, id=None):
-    bill_of_sale = get_object_or_404(BillOfSale, id = id) if id else 0
+    bill_of_sale = get_object_or_404(BillOfSale, id = id) if id else None
     template = loader.get_template('create/bill_of_sale.html')
     context = {'bill_of_sale': bill_of_sale}
 
