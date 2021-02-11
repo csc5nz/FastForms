@@ -1,0 +1,1 @@
+web: gunicorn fastform.wsgi --log-file -
