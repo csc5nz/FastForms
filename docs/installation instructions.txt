@@ -40,3 +40,14 @@ password: frog1234
     
 (how to push to heroku branch:
 from main repository folder $git subtree push --prefix fastform origin heroku
+
+
+
+
+
+
+Deploy to heroku
+git subtree push --prefix <subfolder> origin <branch>
+
+from the FastForm folder
+git subtree push --prefix fastform origin heroku
