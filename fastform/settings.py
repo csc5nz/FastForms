@@ -19,18 +19,24 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
+
 # Gets secrets from the secrets.py file
+debug = True
 try:
     print('exists')
     from . secrets import *
+    
 except ImportError:
     print('no exists')
+    debug = False
     secrete_key = os.getenv('SECRET_KEY')
-    database_engine = os.getenv('DATABASE_ENGINE')
-    database_host = os.getenv('DATABASE_HOST')
-    database_name = os.getenv('DATABASE_NAME')
-    database_user = os.getenv('DATABASE_USER')
-    database_password = os.getenv('DATABASE_PASSWORD')
+    database_engine = "django.db.backends.postgresql_psycopg2"
+    
+    # database_engine = os.getenv('DATABASE_ENGINE')
+    # database_host = os.getenv('DATABASE_HOST')
+    # database_name = os.getenv('DATABASE_NAME')
+    # database_user = os.getenv('DATABASE_USER')
+    # database_password = os.getenv('DATABASE_PASSWORD')
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -39,7 +45,7 @@ SECRET_KEY = secrete_key
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['fastform.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -87,17 +93,25 @@ WSGI_APPLICATION = 'fastform.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': database_engine,
-        'NAME': database_name,
-        'USER': database_user,
-        'PASSWORD': database_password,
-        'HOST': database_host,
-        #'PORT': '5432',
-        # 'TEST': {'NAME': 'fastform_test'}
+
+if debug:
+    DATABASES = {
+        'default': {
+            'ENGINE': database_engine,
+            'NAME': database_name,
+            'USER': database_user,
+            'PASSWORD': database_password,
+            'HOST': database_host,
+            #'PORT': '5432',
+            # 'TEST': {'NAME': 'fastform_test'}
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': "django.db.backends.postgresql_psycopg2",
+        }
+    }
 
 # DATABASES = {
 #     'default': {
