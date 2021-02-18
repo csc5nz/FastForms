@@ -19,7 +19,7 @@ STATES =  (('', '- State -'), ('AL', 'Alabama'), ('AZ', 'Arizona'), ('AR', 'Arka
 
 class BillOfSale(models.Model):
     # Document name should be Document01, 02 ... (need additional function)
-    document_name = models.CharField(max_length=20, default="Document name")
+    document_name = models.CharField(max_length=20, default="Bill of Sale")
     document_date = models.DateTimeField(default=timezone.now)
 
     seller_name = models.CharField('Name', max_length=200, blank=True)

@@ -17,6 +17,10 @@ def my_documents(request):
     documents = Document.objects.all()
     return render(request, 'create/my_documents.html', {'documents': documents})
 
+def create_document(request, id):
+    document = get_object_or_404(Document, id=id)
+    address = 'create:create_' + document.doc_type
+    return redirect(address, page=1, id=document.doc_id)   
 
 def create_bill_of_sale(request, page=None, id=None):
     instance = get_object_or_404(BillOfSale, id=id) if id else None
@@ -60,6 +64,11 @@ def create_bill_of_sale(request, page=None, id=None):
     context = {'form': form, 'page': page, "id" : id, "title" : title[page]}
     return render(request, 'create/build_bill_of_sale_01.html', context)
 
+def view_document(request, id):
+    document = get_object_or_404(Document, id=id)
+    address = 'create:view_' + document.doc_type
+    return redirect(address, id=document.doc_id)   
+
 
 @xframe_options_sameorigin
 def view_bill_of_sale(request, id=None):
@@ -70,12 +79,18 @@ def view_bill_of_sale(request, id=None):
     return HttpResponse(template.render(context, request))
 
 
+def view_pdf_document(request, id):
+    document = get_object_or_404(Document, id=id)
+    address = 'create:view_pdf_' + document.doc_type
+    return redirect(address, id=document.doc_id)   
+
+
 from io import BytesIO
 from django.http import HttpResponse
 from django.template.loader import get_template
 import xhtml2pdf.pisa as pisa
 
-def view_bill_of_sale_pdf(request, id=None):
+def view_pdf_bill_of_sale(request, id=None):
     bill_of_sale = get_object_or_404(BillOfSale, id = id) if id else 0
     template = loader.get_template('create/bill_of_sale_pdf.html')
     context = {'bill_of_sale': bill_of_sale}
@@ -87,3 +102,12 @@ def view_bill_of_sale_pdf(request, id=None):
         return HttpResponse(response.getvalue(), content_type='application/pdf')
     else:
         return HttpResponse("Error Rendering PDF", status=400)
+
+document_models = {"bill_of_sale": BillOfSale}
+def delete_document(request, id):
+    document = get_object_or_404(Document, id=id)
+    document_child = get_object_or_404(document_models[document.doc_type], id=document.doc_id)
+    document_child.delete()
+    document.delete()
+    return redirect('create:my_documents')
+

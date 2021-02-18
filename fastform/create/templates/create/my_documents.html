@@ -50,23 +50,19 @@
 										{% for document in documents %}
 										
 										<tr>
-											{% with 'create:create_'|add:document.doc_type as create_doc_url %}
-											<td><a href="{% url create_doc_url page=1 id=document.doc_id%}">{{ document.doc_type }}</a></td>
-											{% endwith %}
+											<td><a href="{% url 'create:create_document' id=document.id %}">{{ document.doc_name }}</a></td>
 											
 											<td>{{ document.doc_date }}</td>
 											<td>
 											
 												<ul class="actions small">
 												<li class=><a href="#" class="button special small icon fa-print">Print</a></li>
-												{% with 'create:view_'|add:document.doc_type|add:'_pdf' as viewpdf_doc_url %}
-												<li><a href="{% url viewpdf_doc_url id=document.doc_id%}" class="button alt small icon fa-download">Download PDF</a></li>
-												{% endwith %}
+												<li><a href="{% url 'create:view_pdf_document' id=document.id %}" class="button alt small icon fa-download">Download PDF</a></li>
 												<li><a href="#" class="button alt small icon fa-envelope">Send PDF</a></li>
 												</ul>
 												
 											 </td>
-											<td><a href="#" class="button special small icon fa-trash">Delete</a></td>
+											<td><a href="{% url 'create:delete_document' id=document.id %}" class="button special small icon fa-trash">Delete</a></td>
 										</tr>
 										{% endfor %}
 									</tbody>
