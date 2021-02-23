@@ -11,22 +11,10 @@
 	</head>
 	<body>
 
-		<!-- Header -->
-		<header id="header">
-			<a href="index.html" class="logo"><strong>FastForm</strong></a>
-			<nav>
-				<a href="#menu">Menu</a>
-			</nav>
-		</header>
+		{% include "create/header.html" %}
 
-	<!-- Nav -->
-		<nav id="menu">
-			<ul class="links">
-				<li><a href="index.html">Home</a></li>
-				<li><a href="my_account.html">My Account</a></li>
-				<li><a href="log_in.html">Log In</a></li>
-			</ul>
-		</nav>
+		{% include "create/nav.html" %}
+
 		<!-- Main -->
 			<section id="main">
 				<div class="inner">
@@ -85,17 +73,7 @@
 				</div>
 			</section>
 
-		<!-- Footer -->
-			<footer id="footer">
-				<ul class="icons">
-					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-				</ul>
-				<div class="copyright">
-					&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.
-				</div>
-			</footer>
+		{% include "create/footer.html" %}
 
 		<!-- Scripts -->
 			<!-- Scripts -->
