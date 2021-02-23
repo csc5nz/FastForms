@@ -46,7 +46,7 @@ def create_bill_of_sale(request, page=None, id=None):
             print('not valid')
             print(form.errors)
         if page == 3:    
-            return redirect('create:view_bill_of_sale', id=id)    
+            return redirect('create:my_documents')    
             # return redirect('index:home')    
         return redirect('create:create_bill_of_sale', page=next_page, id=id)
     
