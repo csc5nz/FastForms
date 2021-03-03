@@ -12,7 +12,6 @@ from .forms import BillOfSaleForm, BillOfSaleForm01, BillOfSaleForm02, BillOfSal
 def home(request):
     return render(request, 'create/home.html', {})
 
-
 def my_documents(request):
     documents = Document.objects.all()
     return render(request, 'create/my_documents.html', {'documents': documents})

@@ -2,11 +2,13 @@
 
 from django.urls import path
 
-from . import views
+from . import views, user_views
 
 app_name = 'create'
 urlpatterns = [
     path('', views.home, name='home'),
+    path('sign_up', user_views.sign_up, name='sign_up'),
+    path('log_in', user_views.log_in, name='log_in'),
     path('my_documents', views.my_documents, name='my_documents'),
     path('create_document/<int:id>/', views.create_document, name='create_document'),
     path('create_bill_of_sale/', views.create_bill_of_sale, name='create_bill_of_sale'),
