@@ -11,6 +11,7 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ["username", "email", "password1", "password2"]
 
+#Not needed anymore?
 class LogInForm(forms.ModelForm):
     class Meta:
         model = User

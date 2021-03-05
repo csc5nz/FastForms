@@ -13,7 +13,12 @@ def home(request):
     return render(request, 'create/home.html', {})
 
 def my_documents(request):
-    documents = Document.objects.all()
+    if request.user.is_authenticated:
+        user = request.user
+    else:
+        return redirect('create:log_in')
+
+    documents = Document.objects.filter(user=user)
     return render(request, 'create/my_documents.html', {'documents': documents})
 
 def create_document(request, id):
@@ -24,6 +29,13 @@ def create_document(request, id):
 def create_bill_of_sale(request, page=None, id=None):
     instance = get_object_or_404(BillOfSale, id=id) if id else None
     next_page = 0
+    if request.user.is_authenticated:
+        user = request.user
+    else:
+        user = None
+    if instance and instance.user != user:
+        return redirect('create:my_documents')
+
     if request.method == "POST":
         if page is None or page == 1:
             page = 1
@@ -41,11 +53,18 @@ def create_bill_of_sale(request, page=None, id=None):
         if form.is_valid():
             bill_of_sale = form.save()
             id = bill_of_sale.id   
+            if not instance:
+                bill_of_sale.user = user
+                bill_of_sale.save()
+            
         else:
             print('not valid')
             print(form.errors)
-        if page == 3:    
-            return redirect('create:my_documents')    
+        if page == 3:
+            if user:    
+                return redirect('create:my_documents')
+            else:
+                return redirect('create:log_in', id=bill_of_sale.document.id)
             # return redirect('index:home')    
         return redirect('create:create_bill_of_sale', page=next_page, id=id)
     

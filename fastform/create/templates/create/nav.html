@@ -3,6 +3,10 @@
     <ul class="links">
         <li><a href="{% url 'create:home' %}">Home</a></li>
         <li><a href="{% url 'create:my_documents' %}">My Account</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'create:log_out' %}">Log Out</a></li>
+        {% else %}
         <li><a href="{% url 'create:log_in' %}">Log In</a></li>
+        {% endif %}
     </ul>
 </nav>

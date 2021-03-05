@@ -3,6 +3,8 @@ import datetime
 from django.db import models
 from django.utils import timezone
 
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 DOCUMENT_TYPES = (('', 'empty'), ('bill_of_sale', 'Bill of Sale'), ('articles_of_incorporation', 'Articles of Incorporation')) 
@@ -13,6 +15,7 @@ class Document(models.Model):
     # Document name should be Document01, 02 ... (need additional function)
     doc_name = models.CharField(max_length=20, default="Document name")
     doc_date = models.DateTimeField(default=timezone.now)
+    user = models.ForeignKey(User, default="", blank=True, null=True, on_delete=models.CASCADE)
 
     
 STATES =  (('', '- State -'), ('AL', 'Alabama'), ('AZ', 'Arizona'), ('AR', 'Arkansas'), ('CA', 'California'), ('CO', 'Colorado'), ('CT', 'Connecticut'), ('DE', 'Delaware'), ('DC', 'District of Columbia'), ('FL', 'Florida'), ('GA', 'Georgia'), ('ID', 'Idaho'), ('IL', 'Illinois'), ('IN', 'Indiana'), ('IA', 'Iowa'), ('KS', 'Kansas'), ('KY', 'Kentucky'), ('LA', 'Louisiana'), ('ME', 'Maine'), ('MD', 'Maryland'), ('MA', 'Massachusetts'), ('MI', 'Michigan'), ('MN', 'Minnesota'), ('MS', 'Mississippi'), ('MO', 'Missouri'), ('MT', 'Montana'), ('NE', 'Nebraska'), ('NV', 'Nevada'), ('NH', 'New Hampshire'), ('NJ', 'New Jersey'), ('NM', 'New Mexico'), ('NY', 'New York'), ('NC', 'North Carolina'), ('ND', 'North Dakota'), ('OH', 'Ohio'), ('OK', 'Oklahoma'), ('OR', 'Oregon'), ('PA', 'Pennsylvania'), ('RI', 'Rhode Island'), ('SC', 'South Carolina'), ('SD', 'South Dakota'), ('TN', 'Tennessee'), ('TX', 'Texas'), ('UT', 'Utah'), ('VT', 'Vermont'), ('VA', 'Virginia'), ('WA', 'Washington'), ('WV', 'West Virginia'), ('WI', 'Wisconsin'), ('WY', 'Wyoming'))
@@ -21,6 +24,8 @@ class BillOfSale(models.Model):
     # Document name should be Document01, 02 ... (need additional function)
     document_name = models.CharField(max_length=20, default="Bill of Sale")
     document_date = models.DateTimeField(default=timezone.now)
+    user = models.ForeignKey(User, default="", blank=True, null=True, on_delete=models.CASCADE)
+    document = models.OneToOneField(Document, on_delete=models.CASCADE,null=True, blank=True)
 
     seller_name = models.CharField('Name', max_length=200, blank=True)
     seller_address = models.CharField('Address', max_length=200, blank=True)
@@ -51,6 +56,12 @@ class BillOfSale(models.Model):
             document.doc_type = 'bill_of_sale'
             document.doc_name = self.document_name
             document.save()
+            self.document = document
+        else:
+            document = self.document
+            document.user = self.user
+            document.save()
+
 
     # def __str__(self):
     #     return 
