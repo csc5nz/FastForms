@@ -46,7 +46,11 @@
 											<!-- <li><input type="reset" value="Cancel" /></li> -->
 										</ul>
 										<ul class="actions">
-											<li><a href="{% url 'create:log_in' %}">Log In</a></li>
+											{% if document %}
+												<li><a href="{% url 'create:log_in' id=document.id %}">Log In</a></li>
+											{% else %}
+												<li><a href="{% url 'create:log_in'%}">Log In</a></li>
+											{% endif %}
 										</ul>
 									</div>
 								</div>
