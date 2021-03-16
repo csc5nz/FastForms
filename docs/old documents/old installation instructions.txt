@@ -20,30 +20,24 @@ database_password = "frog1234"
 #static_url = ""
 
 
-2. create secrets.txt in FastForms/docs 
-
-mysql credentials:
-user: fastform
-password: frog1234
-
-3. create fastform database
+2. create fastform database
 
 
-
-4. run requirements.txt
+3. run requirements.txt
     (install mysql-python, may not work because it's only compatible with python 2.6)
-    my need to use sudo apt-get install python3-dev libmysqlclient-dev
+    might need to use sudo apt-get install python3-dev libmysqlclient-dev
     istead
     
     
     
+
+    
+    
+    
+Deploy to Heroku:
     
 (how to push to heroku branch:
 from main repository folder $git subtree push --prefix fastform origin heroku
-
-
-
-
 
 
 Deploy to heroku
