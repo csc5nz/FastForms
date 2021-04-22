@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,22 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# Gets secrets from the secrets.py file
-try:
-    print('exists')
-    from . secrets import *
-except ImportError:
-    print('no exists')
-    secrete_key = os.getenv('SECRET_KEY')
-    database_engine = os.getenv('DATABASE_ENGINE')
-    database_host = os.getenv('DATABASE_HOST')
-    database_name = os.getenv('DATABASE_NAME')
-    database_user = os.getenv('DATABASE_USER')
-    database_password = os.getenv('DATABASE_PASSWORD')
-
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = secrete_key
+SECRET_KEY = 'o3uo3dceyst)tvgn=lxqezl@&casd3)4buxxt97wh$rx^y*nq4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -87,24 +75,24 @@ WSGI_APPLICATION = 'fastform.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+#DATABASES = {
+    #'default': {
+        #'ENGINE': database_engine,
+        #'NAME': database_name,
+        #'USER': database_user,
+        #'PASSWORD': database_password,
+        #'HOST': database_host,
+        #'PORT': '5432',
+        #'TEST': {'NAME': 'fastform_test'}
+    #}
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': database_engine,
-        'NAME': database_name,
-        'USER': database_user,
-        'PASSWORD': database_password,
-        'HOST': database_host,
-        #'PORT': '5432',
-        # 'TEST': {'NAME': 'fastform_test'}
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 
 
 # Password validation
@@ -145,3 +133,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
