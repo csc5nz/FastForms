@@ -9,6 +9,7 @@
 5. [Database Creation and Setup](#database-creation-and-setup) 
 5. [Django Settings File Update](#django-settings-file-update)  
 6. [Data Migration and Server Startup](#data-migration-and-server-startup)  
+7. [Deployment Instructions](#deployment-instructions)
 
 ## Overview
 
@@ -71,10 +72,8 @@ From the directory containing manage.py run the following commands:
 - python manage.py collectstatic
 - python manage.py makemigrations
 - python manage.py migrate
-- python manage.py runserver   
-
-
-
+- python manage.py runserver      
+    
    
 # Deployment Instructions
 
