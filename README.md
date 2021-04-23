@@ -1,6 +1,6 @@
 # FastForms
 
-### [FastForm website](#) 
+### [FastForm Website](https://fastform.herokuapp.com/)   
 
 FastForm is a web app which allows users to build personilized legal documents such as bill of sale, tax forms, or invoices. Users are able to customize documents by answering a few questions. The app creates a document with all the the information filled out. The user is able to print or download a pdf version of the document.   
  
@@ -11,6 +11,12 @@ The website was created using python, javascript, html, css, and mysql.
 See [INSTALLATION.md](INSTALLATION.md) for details on installing and running FastForm on your computer.    
 
 If you want to contribute to this open source project, check out [CONTRIBUTING.md](CONTRIBUTING.md)    
+
+### Video On Youtube
+
+[![FastForm](thumbnail.png)](https://www.youtube.com/watch?v=LxlcR74XAFE)    
+
+### Screenshots
 
 [![alt text](screenshot.png)](#)   
 
