@@ -6,7 +6,7 @@ django-heroku==0.3.1
 future==0.18.2
 gunicorn==20.1.0
 html5lib==1.1
-Pillow==8.2.0
+Pillow==9.0.0
 psycopg2==2.8.6
 psycopg2-binary==2.8.6
 PyPDF2==1.26.0
